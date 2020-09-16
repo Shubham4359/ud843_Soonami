@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
                 // TODO Handle the IOException
+                Log.v("MainActivity","Error getting the json response string");
             }
 
             // Extract relevant fields from the JSON response and create an {@link Event} object
@@ -147,8 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 if(urlConnection.getResponseCode()==200){
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }} catch (IOException e) {
+            }
+            else{
+                Log.v("MainActivity","Error response code "+urlConnection.getResponseCode());
+                }} catch (IOException e) {
                 // TODO: Handle the exception
+                Log.v("MainActivity","Error as internet connection is not available");
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
